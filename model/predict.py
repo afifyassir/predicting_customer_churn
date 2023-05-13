@@ -4,7 +4,7 @@ import pandas as pd
 
 from model import __version__ as _version
 from model.config.core import config
-from model.preprocessing.data_manager import _load_raw_dataset, load_pipeline
+from model.preprocessing.data_manager import load_pipeline
 from model.preprocessing.validation import validate_inputs
 
 pipeline_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"

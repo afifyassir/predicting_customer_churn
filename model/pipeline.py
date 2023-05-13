@@ -1,9 +1,8 @@
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 from feature_engine.encoding import CountFrequencyEncoder
-from sklearn.preprocessing import MinMaxScaler
-
+from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler
 
 from model.config.core import config
 
@@ -11,7 +10,7 @@ from model.config.core import config
 
 scaler = MinMaxScaler()
 encoder = CountFrequencyEncoder()
-params = {'n_estimators': 180, 'max_depth': 14}
+params = {"n_estimators": 180, "max_depth": 14}
 classifier = RandomForestClassifier()
 
 # Preprocessing steps for the numerical variables
@@ -28,4 +27,3 @@ preprocessor = ColumnTransformer(
 )
 
 pipe = Pipeline(steps=[("preprocessing", preprocessor), ("model", classifier)])
-
