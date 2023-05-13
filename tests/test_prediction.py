@@ -8,12 +8,12 @@ from sklearn.metrics import accuracy_score
 from model.predict import make_prediction
 
 
-def test_make_prediction(sample_input_data):
+async def test_make_prediction(sample_input_data):
     # Given
     expected_no_predictions = len(sample_input_data[0])
 
     # When
-    result = make_prediction(input_data=sample_input_data[0])
+    result = await make_prediction(input_data=sample_input_data[0])
 
     # Then
     predictions = result.get("predictions")

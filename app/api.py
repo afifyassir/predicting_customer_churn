@@ -32,15 +32,15 @@ def health() -> dict:
 @api_router.post("/predict", response_model=PredictionResults, status_code=200)
 async def predict(input_data: MultipleDataInputs) -> Any:
     """
-    Make booking predictions for BA customers
+    Predicting customer churn
     """
 
     input_df = pd.DataFrame(jsonable_encoder(input_data.inputs))
 
-    # Advanced: You can improve performance of your API by rewriting the
+    # Advanced: we can improve performance of our API by rewriting the
     # `make prediction` function to be async and using await here.
     logger.info(f"Making prediction on inputs: {input_data.inputs}")
-    results = make_prediction(input_data=input_df.replace({np.nan: None}))
+    results = await make_prediction(input_data=input_df.replace({np.nan: None}))
 
     if results["errors"] is not None:
         logger.warning(f"Prediction validation error: {results.get('errors')}")

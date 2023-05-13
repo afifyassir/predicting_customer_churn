@@ -11,7 +11,7 @@ pipeline_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
 _pipe = load_pipeline(file_name=pipeline_file_name)
 
 
-def make_prediction(
+async def make_prediction(
     *,
     input_data: t.Union[pd.DataFrame, dict],
 ) -> dict:

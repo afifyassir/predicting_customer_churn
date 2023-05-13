@@ -1,11 +1,12 @@
+from typing import Any, Union
+
 import numpy as np
 import pandas as pd
 from fastapi.testclient import TestClient
 
 
 def test_make_prediction(client: TestClient, test_data: pd.DataFrame) -> None:
-
-    def convert_timestamps(obj):
+    def convert_timestamps(obj: Any) -> Union[str, Any]:
         if isinstance(obj, pd.Timestamp):
             return obj.isoformat()
         return obj

@@ -4,19 +4,12 @@ from typing import List
 
 import joblib
 import pandas as pd
-from feature_engine.encoding import RareLabelEncoder
 from sklearn.pipeline import Pipeline
 
 from model import __version__ as _version
 from model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
 logger = logging.getLogger(__name__)
-
-
-def _load_raw_dataset(*, file_name: str) -> pd.DataFrame:
-    dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
-    transformed = handle_rare_labels(dataset=dataframe)
-    return transformed
 
 
 def load_dataset(*, client_file_name: str, price_file_name: str) -> pd.DataFrame:
@@ -95,19 +88,7 @@ def remove_old_pipelines(*, files_to_keep: List[str]) -> None:
             model_file.unlink()
 
 
-def handle_rare_labels(dataset: pd.DataFrame) -> pd.DataFrame:
-    # Grouping rare categories in a new
-    # category called "other"
-    lab_enc = RareLabelEncoder(
-        variables=config.model_config.categorical_vars,
-        n_categories=1,
-        tol=0.0003,
-        replace_with="other",
-    )
-    return lab_enc.fit_transform(dataset)
-
-
-def datetime_conversion_client(df: pd.DataFrame):
+def datetime_conversion_client(df: pd.DataFrame) -> pd.DataFrame:
 
     df["date_activ"] = pd.to_datetime(df["date_activ"], format="%Y-%m-%d")
     df["date_end"] = pd.to_datetime(df["date_end"], format="%Y-%m-%d")
@@ -117,14 +98,14 @@ def datetime_conversion_client(df: pd.DataFrame):
     return df
 
 
-def datetime_conversion_price(df: pd.DataFrame):
+def datetime_conversion_price(df: pd.DataFrame) -> pd.DataFrame:
 
     df["price_date"] = pd.to_datetime(df["price_date"], format="%Y-%m-%d")
 
     return df
 
 
-def price_data_trans(df: pd.DataFrame):
+def price_data_trans(df: pd.DataFrame) -> pd.DataFrame:
 
     # Group off-peak prices by companies and month
     monthly_price_by_id = (
@@ -154,7 +135,7 @@ def price_data_trans(df: pd.DataFrame):
     return diff
 
 
-def merging_datasets(df: pd.DataFrame, df_1: pd.DataFrame):
+def merging_datasets(df: pd.DataFrame, df_1: pd.DataFrame) -> pd.DataFrame:
 
     new_df = df.merge(df_1, how="left", left_on="id", right_on="id")
 
@@ -162,7 +143,7 @@ def merging_datasets(df: pd.DataFrame, df_1: pd.DataFrame):
 
 
 # A function to create the new feature "price_change"
-def price_change(x):
+def price_change(x: float) -> str:
     if x > 0:
         return "increase"
     elif x < 0:
@@ -171,7 +152,7 @@ def price_change(x):
         return "stable"
 
 
-def time_features(df: pd.DataFrame):
+def time_features(df: pd.DataFrame) -> pd.DataFrame:
     # Getting the activation year
     df["activ_year"] = df["date_activ"].dt.year
 
@@ -211,7 +192,7 @@ def time_features(df: pd.DataFrame):
     return df
 
 
-def consum_features(df: pd.DataFrame):
+def consum_features(df: pd.DataFrame) -> pd.DataFrame:
 
     # Getting the average consumption per month for the past 12 months.
     df["avrg_month_cons"] = df["cons_12m"] / 12

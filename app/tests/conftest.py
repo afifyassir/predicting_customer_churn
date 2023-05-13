@@ -12,8 +12,10 @@ from model.preprocessing.data_manager import load_dataset
 @pytest.fixture(scope="module")
 def test_data() -> pd.DataFrame:
     return pd.DataFrame(
-        load_dataset(client_file_name=config.app_config.client_data_file,
-                     price_file_name=config.app_config.price_data_file).iloc[0]
+        load_dataset(
+            client_file_name=config.app_config.client_data_file,
+            price_file_name=config.app_config.price_data_file,
+        ).iloc[0]
     ).T
 
 
