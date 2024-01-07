@@ -1,13 +1,17 @@
 import logging
+import sys
 from pathlib import Path
 from typing import List
 
-import joblib
-import pandas as pd
-from sklearn.pipeline import Pipeline
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from model import __version__ as _version
-from model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
+import joblib  # noqa: E402
+import pandas as pd  # noqa: E402
+from sklearn.pipeline import Pipeline  # noqa: E402
+
+from model import __version__ as _version  # noqa: E402
+from model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config  # noqa: E402
 
 logger = logging.getLogger(__name__)
 

@@ -2,10 +2,16 @@
 Note: These tests will fail if you have not first trained the model.
 """
 
+import sys
+from pathlib import Path
+
 import numpy as np
 from sklearn.metrics import accuracy_score
 
 from model.predict import make_prediction
+
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 
 async def test_make_prediction(sample_input_data):

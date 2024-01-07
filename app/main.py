@@ -1,12 +1,17 @@
 from typing import Any
+from pathlib import Path
+import sys
 
 from fastapi import APIRouter, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from loguru import logger
 
-from app.api import api_router
-from app.config import settings, setup_app_logging
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from app.api import api_router  # noqa: E402
+from app.config import settings, setup_app_logging  # noqa: E402
 
 # setup logging as early as possible
 setup_app_logging(config=settings)

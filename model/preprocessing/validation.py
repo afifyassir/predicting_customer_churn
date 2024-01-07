@@ -1,11 +1,16 @@
 import json
+import sys
+from pathlib import Path
 from typing import List, Optional, Tuple
 
-import numpy as np
-import pandas as pd
-from pydantic import BaseModel, ValidationError
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from model.config.core import config
+import numpy as np  # noqa: E402
+import pandas as pd  # noqa: E402
+from pydantic import BaseModel, ValidationError  # noqa: E402
+
+from model.config.core import config  # noqa: E402
 
 
 def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional[dict]]:

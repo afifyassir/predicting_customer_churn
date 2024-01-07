@@ -1,10 +1,15 @@
 import logging
+import sys
+from pathlib import Path
 
 import pytest
 from sklearn.model_selection import train_test_split
 
-from model.config.core import config
-from model.preprocessing.data_manager import load_dataset
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from model.config.core import config  # noqa: E402
+from model.preprocessing.data_manager import load_dataset  # noqa: E402
 
 logger = logging.getLogger(__name__)
 

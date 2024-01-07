@@ -1,10 +1,14 @@
+import sys
 from pathlib import Path
 from typing import Optional, Sequence
 
-from pydantic import BaseModel
-from strictyaml import YAML, load
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-import model
+from pydantic import BaseModel  # noqa: E402
+from strictyaml import YAML, load  # noqa: E402
+
+import model  # noqa: E402
 
 PACKAGE_ROOT = Path(model.__file__).resolve().parent
 ROOT = PACKAGE_ROOT.parent
@@ -14,7 +18,7 @@ TRAINED_MODEL_DIR = PACKAGE_ROOT / "trained_models"
 
 
 # Configuration related to the application
-class AppConfig(BaseModel):
+class AppConfig(BaseModel):c
     package_name: str
     pipeline_save_file: str
     client_data_file: str

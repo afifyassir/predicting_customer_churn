@@ -1,4 +1,6 @@
 import json
+import sys
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -7,12 +9,15 @@ from fastapi import APIRouter, HTTPException
 from fastapi.encoders import jsonable_encoder
 from loguru import logger
 
-from app import __version__
-from app.config import settings
-from app.schemas.health import Health
-from app.schemas.predict import MultipleDataInputs, PredictionResults
-from model import __version__ as model_version
-from model.predict import make_prediction
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from app import __version__  # noqa: E402
+from app.config import settings  # noqa: E402
+from app.schemas.health import Health  # noqa: E402
+from app.schemas.predict import MultipleDataInputs, PredictionResults  # noqa: E402
+from model import __version__ as model_version  # noqa: E402
+from model.predict import make_prediction  # noqa: E402
 
 api_router = APIRouter()
 

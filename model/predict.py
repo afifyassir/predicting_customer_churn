@@ -1,11 +1,16 @@
+import sys
 import typing as t
+from pathlib import Path
 
 import pandas as pd
 
-from model import __version__ as _version
-from model.config.core import config
-from model.preprocessing.data_manager import load_pipeline
-from model.preprocessing.validation import validate_inputs
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from model import __version__ as _version  # noqa: E402
+from model.config.core import config  # noqa: E402
+from model.preprocessing.data_manager import load_pipeline  # noqa: E402
+from model.preprocessing.validation import validate_inputs  # noqa: E402
 
 pipeline_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
 _pipe = load_pipeline(file_name=pipeline_file_name)

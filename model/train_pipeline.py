@@ -1,8 +1,14 @@
+import sys
+from pathlib import Path
+
 from sklearn.model_selection import train_test_split
 
-from model.config.core import config
-from model.pipeline import pipe
-from model.preprocessing.data_manager import load_dataset, save_pipeline
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from model.config.core import config  # noqa: E402
+from model.pipeline import pipe  # noqa: E402
+from model.preprocessing.data_manager import load_dataset, save_pipeline  # noqa: E402
 
 
 def run_training() -> None:

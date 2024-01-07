@@ -1,8 +1,13 @@
+import sys
+from pathlib import Path
 from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
-from model.preprocessing.validation import DataInputSchema
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
+from model.preprocessing.validation import DataInputSchema  # noqa: E402
 
 
 class PredictionResults(BaseModel):

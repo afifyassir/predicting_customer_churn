@@ -1,10 +1,16 @@
+import sys
+from pathlib import Path
+
 from feature_engine.encoding import CountFrequencyEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 
-from model.config.core import config
+# Add the root of your project to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from model.config.core import config  # noqa: E402
 
 # Creating the pipeline
 
