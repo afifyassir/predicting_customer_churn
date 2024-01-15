@@ -18,7 +18,7 @@ TRAINED_MODEL_DIR = PACKAGE_ROOT / "trained_models"
 
 
 # Configuration related to the application
-class AppConfig(BaseModel):c
+class AppConfig(BaseModel):
     package_name: str
     pipeline_save_file: str
     client_data_file: str
